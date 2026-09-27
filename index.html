@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cremoladas RyG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8, #faf5ff, #eef2ff);
+            color: #1e1b4b;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-decor {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .bg-fruit, .bg-ice {
+            position: absolute; font-size: 42px; opacity: 0.07;
+            animation: floatBg 9s ease-in-out infinite;
+        }
+        .bg-ice { font-size: 36px; opacity: 0.05; animation-duration: 11s; }
+        @keyframes floatBg {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-22px) rotate(10deg); }
+        }
+        .container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            position: relative; z-index: 10;
+        }
+        .fruit-icon {
+            position: absolute; font-size: 28px; opacity: 0.14;
+            pointer-events: none; z-index: 2;
+            animation: fruitFloat 6s ease-in-out infinite;
+        }
+        @keyframes fruitFloat {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
+        }
+        .fruit-1 { top: 14%; left: 3%; animation-delay: 0s; }
+        .fruit-2 { top: 28%; right: 4%; animation-delay: 1s; }
+        .fruit-3 { top: 58%; left: 2.5%; animation-delay: 2s; }
+        .fruit-4 { top: 78%; right: 3%; animation-delay: 3s; }
+        .fruit-5 { bottom: 12%; left: 4%; animation-delay: 1.5s; }
+        .fruit-6 { bottom: 22%; right: 2.5%; animation-delay: 2.5s; }
+        .top-banner {
+            background: linear-gradient(90deg, #ec4899, #d946ef, #a855f7, #6366f1, #312e81);
+            color: #fff; text-align: center; padding: 12px 20px;
+            font-weight: 700; font-size: 14px; position: relative; z-index: 10;
+        }
+        header {
+            background: rgba(255,255,255,0.88); backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(168,85,247,0.08);
+            position: sticky; top: 0; z-index: 100; padding: 15px 0;
+        }
+        .nav-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 15px;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1e1b4b; }
+        .logo-icon {
+            width: 45px; height: 45px; border-radius: 12px;
+            background: linear-gradient(135deg, #ec4899, #a855f7, #6366f1);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 22px; box-shadow: 0 4px 12px rgba(168,85,247,0.3);
+        }
+        .logo-text h2 { font-size: 18px; font-weight: 800; }
+        .logo-text span {
+            background: linear-gradient(90deg, #ec4899, #a855f7);
+            -webkit-background-clip: text; color: transparent;
+        }
+        .logo-text p { font-size: 11px; color: #8b88b8; text-transform: uppercase; letter-spacing: 1px; }
+        nav a {
+            text-decoration: none; color: #1e1b4b; font-weight: 600;
+            font-size: 15px; margin-left: 25px; transition: color 0.3s;
+        }
+        nav a:hover { color: #a855f7; }
+        section { padding: 50px 0; position: relative; z-index: 5; }
+        .section-title { text-align: center; margin-bottom: 35px; }
+        .section-title h2 { font-size: 30px; font-weight: 800; margin-bottom: 10px; }
+        .section-title h2 span {
+            background: linear-gradient(90deg, #ec4899, #a855f7);
+            -webkit-background-clip: text; color: transparent;
+        }
+        .section-title p { color: #6b6898; max-width: 600px; margin: 0 auto; }
+        #inicio { padding: 40px 0 60px; }
+        .hero-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 40px; align-items: center;
+        }
+        .hero-text p.subtitle {
+            color: #7c3aed; font-weight: 700; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;
+        }
+        .hero-text h1 { font-size: 40px; line-height: 1.2; margin-bottom: 25px; }
+        .hero-text h1 span {
+            background: linear-gradient(90deg, #ec4899, #a855f7, #6366f1);
+            -webkit-background-clip: text; color: transparent;
+        }
+        .hero-text p.desc { color: #5b5890; font-size: 16px; margin-bottom: 30px; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
+        .btn-primary {
+            padding: 12px 28px; background: linear-gradient(135deg, #ec4899, #a855f7);
+            color: #fff; border-radius: 50px; text-decoration: none;
+            font-weight: 700; font-size: 15px; box-shadow: 0 4px 15px rgba(168,85,247,0.35);
+            transition: transform 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-secondary {
+            padding: 12px 28px; border: 2px solid #a855f7; color: #6b21a8;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px;
+        }
+        .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-item .num { font-size: 28px; font-weight: 800; }
+        .stat-item .num.pink { color: #ec4899; }
+        .stat-item .num.fuchsia { color: #a855f7; }
+        .stat-item .num.blue { color: #6366f1; }
+        .stat-item .label { font-size: 13px; color: #8b88b8; }
+        .hero-img {
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(99,102,241,0.2);
+            width: 100%; background: linear-gradient(135deg, #fce7f3, #ede9fe, #e0e7ff);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-img img {
+            width: 100%; max-height: 420px; object-fit: contain;
+            display: block; border-radius: 20px;
+        }
+        .price-cards {
+            display: flex; gap: 20px; justify-content: center;
+            flex-wrap: wrap; margin-bottom: 40px;
+        }
+        .price-card {
+            background: rgba(255,255,255,0.92); padding: 25px 20px;
+            border-radius: 20px; width: 220px; text-align: center;
+            box-shadow: 0 6px 20px rgba(168,85,247,0.08);
+            transition: transform 0.3s;
+        }
+        .price-card:hover { transform: translateY(-5px); }
+        .price-card.pink { border-top: 4px solid #ec4899; }
+        .price-card.fuchsia { border-top: 4px solid #a855f7; }
+        .price-card.blue { border-top: 4px solid #6366f1; }
+        .price-icon { font-size: 32px; margin-bottom: 12px; display:flex; align-items:center; justify-content:center; }
+        .price-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 15px; }
+        .price-card.pink h4 { color: #be185d; }
+        .price-card.fuchsia h4 { color: #6b21a8; }
+        .price-card.blue h4 { color: #3730a3; }
+        .price-values { display: flex; justify-content: center; gap: 10px; }
+        .price-tag { padding: 8px 12px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+        .price-card.pink .price-tag { background: #fce7f3; color: #be185d; }
+        .price-card.fuchsia .price-tag { background: #ede9fe; color: #6b21a8; }
+        .price-card.blue .price-tag { background: #e0e7ff; color: #3730a3; }
+        .price-tag small { display: block; font-size: 11px; opacity: 0.7; margin-bottom: 2px; }
+        .filters {
+            display: flex; gap: 12px; justify-content: center;
+            flex-wrap: wrap; margin-bottom: 30px;
+        }
+        .filter-btn {
+            padding: 10px 22px; border-radius: 50px; border: 2px solid #ddd6fe;
+            background: #fff; font-weight: 600; cursor: pointer;
+            transition: all 0.3s; font-size: 14px; color: #6b6898;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ec4899, #a855f7);
+            color: #fff; border-color: transparent;
+        }
+        .flavors-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px;
+        }
+        .flavor-card {
+            background: rgba(255,255,255,0.92); border-radius: 20px; padding: 25px;
+            box-shadow: 0 4px 15px rgba(168,85,247,0.07);
+            border-top: 4px solid; transition: transform 0.3s;
+        }
+        .flavor-card:hover { transform: translateY(-5px); }
+        .flavor-card.pink { border-color: #ec4899; }
+        .flavor-card.fuchsia { border-color: #a855f7; }
+        .flavor-card.blue { border-color: #6366f1; }
+        .flavor-tag {
+            display: inline-block; font-size: 11px; font-weight: 700;
+            padding: 4px 12px; border-radius: 50px; margin-bottom: 12px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .flavor-tag.pink { background: #fce7f3; color: #be185d; }
+        .flavor-tag.fuchsia { background: #ede9fe; color: #6b21a8; }
+        .flavor-tag.blue { background: #e0e7ff; color: #3730a3; }
+        .flavor-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .flavor-card p { font-size: 13px; color: #6b6898; margin-bottom: 15px; }
+        .favorite-badge {
+            font-size: 11px; font-weight: 700; background: #fef3c7;
+            color: #92400e; padding: 3px 9px; border-radius: 50px;
+            display: inline-block; margin-left: 8px;
+        }
+        .flavor-price-row { display: flex; gap: 10px; }
+        .flavor-price {
+            flex: 1; text-align: center; padding: 8px;
+            border-radius: 10px; font-weight: 700; font-size: 14px;
+        }
+        .flavor-card.pink .flavor-price { background: #fce7f3; color: #be185d; }
+        .flavor-card.fuchsia .flavor-price { background: #ede9fe; color: #6b21a8; }
+        .flavor-card.blue .flavor-price { background: #e0e7ff; color: #3730a3; }
+        .flavor-price small { display: block; font-size: 11px; opacity: 0.7; }
+        #galeria { background: rgba(255,255,255,0.5); }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+        }
+        .gallery-item {
+            aspect-ratio: 1/1; border-radius: 14px; overflow: hidden;
+            background: #ede9fe; box-shadow: 0 4px 14px rgba(99,102,241,0.12);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block; transition: transform 0.3s;
+        }
+        .gallery-item img:hover { transform: scale(1.05); }
+        .pedidos-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 25px; margin-bottom: 30px;
+        }
+        .pedido-card {
+            background: rgba(255,255,255,0.92); padding: 30px;
+            border-radius: 20px; box-shadow: 0 6px 20px rgba(168,85,247,0.08);
+            border-top: 4px solid;
+        }
+        .pedido-card.pink { border-color: #ec4899; }
+        .pedido-card.fuchsia { border-color: #a855f7; }
+        .pedido-icon { font-size: 32px; margin-bottom: 15px; }
+        .pedido-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+        .pedido-card p { color: #5b5890; font-size: 14px; margin-bottom: 15px; }
+        .pedido-note {
+            font-size: 13px; font-weight: 600; padding: 8px 14px;
+            border-radius: 50px; display: inline-block; margin-bottom: 15px;
+        }
+        .pedido-note.pink { background: #fce7f3; color: #be185d; }
+        .pedido-note.fuchsia { background: #ede9fe; color: #6b21a8; }
+        .btn-wsp {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; background: #22c55e; color: #fff;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 14px;
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border: 2px solid #a855f7; color: #6b21a8;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 14px;
+        }
+        .contact-info {
+            background: rgba(255,255,255,0.92); padding: 20px; border-radius: 15px;
+            text-align: center; display: flex; gap: 30px; justify-content: center;
+            flex-wrap: wrap; font-size: 14px; color: #5b5890; font-weight: 500;
+        }
+        .contact-info strong { color: #7c3aed; }
+        .features {
+            display: flex; gap: 15px; justify-content: center;
+            flex-wrap: wrap; margin-top: 25px;
+        }
+        .feature-item {
+            background: rgba(255,255,255,0.92); padding: 12px 18px;
+            border-radius: 10px; font-size: 13px; font-weight: 500;
+            display: flex; align-items: center; gap: 8px; color: #5b5890;
+        }
+        footer {
+            background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca);
+            color: #c7d2fe; padding: 40px 0; position: relative; z-index: 5;
+        }
+        .footer-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 25px;
+        }
+        .footer-brand h3 { font-size: 20px; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .footer-brand span { color: #f9a8d4; }
+        .footer-brand p { font-size: 12px; color: #a5b4fc; margin-top: 8px; line-height: 1.7; }
+        .footer-contact { text-align: right; }
+        .footer-contact p { font-size: 13px; }
+        .footer-contact strong { color: #fff; }
+        @media (max-width: 900px) {
+            .hero-grid, .pedidos-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-inner { justify-content: center; }
+            nav { margin-top: 10px; }
+            nav a { margin: 0 10px; }
+            .hero-text h1 { font-size: 30px; }
+            .hero-stats { justify-content: center; }
+            .footer-inner, .footer-contact { text-align: center; }
+            .footer-contact { margin-top: 15px; }
+        }
+        @media (max-width: 500px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .btn-group { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FONDO: hielos y frutas -->
+    <div class="bg-decor">
+        <div class="bg-fruit" style="top:8%; left:6%;">🍓</div>
+        <div class="bg-fruit" style="top:18%; right:10%; animation-delay:1s;">🥭</div>
+        <div class="bg-fruit" style="top:42%; left:4%; animation-delay:2s;">🍍</div>
+        <div class="bg-fruit" style="top:62%; right:7%; animation-delay:3s;">🍋</div>
+        <div class="bg-fruit" style="bottom:18%; left:9%; animation-delay:1.5s;">🫐</div>
+        <div class="bg-fruit" style="bottom:28%; right:5%; animation-delay:2.5s;">🍑</div>
+        <div class="bg-fruit" style="top:32%; left:18%; animation-delay:0.5s;">🍉</div>
+        <div class="bg-fruit" style="top:82%; left:22%; animation-delay:4s;">🥝</div>
+        <div class="bg-ice" style="top:15%; left:42%; animation-delay:0.8s;">🧊</div>
+        <div class="bg-ice" style="top:50%; right:22%; animation-delay:2.2s;">❄️</div>
+        <div class="bg-ice" style="bottom:32%; left:52%; animation-delay:3.5s;">🧊</div>
+        <div class="bg-ice" style="top:72%; left:72%; animation-delay:1.8s;">❄️</div>
+    </div>
+
+    <!-- Frutitas flotantes -->
+    <div class="fruit-icon fruit-1">🍓</div>
+    <div class="fruit-icon fruit-2">🥭</div>
+    <div class="fruit-icon fruit-3">🍍</div>
+    <div class="fruit-icon fruit-4">🍊</div>
+    <div class="fruit-icon fruit-5">🍋</div>
+    <div class="fruit-icon fruit-6">🫐</div>
+
+    <!-- Banner -->
+    <div class="top-banner">
+        SOLO VENTA AL POR MAYOR · PEDIDO MÍNIMO 30 CREMOLADAS · ENVÍOS POR APLICATIVO A TODA LIMA · PAGO CONTRA ENTREGA
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#inicio" class="logo">
+                <div class="logo-icon">🍧</div>
+                <div class="logo-text">
+                    <h2>Cremoladas <span>RyG</span></h2>
+                    <p>100% Fruta natural</p>
+                </div>
+            </a>
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#sabores">Sabores</a>
+                <a href="#galeria">Galería</a>
+                <a href="#pedidos">Pedidos</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="inicio">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <p class="subtitle">✨ 100% Fruta natural · Sin colorantes artificiales</p>
+                    <h1>Las cremoladas más <span>deliciosas y cremosas</span></h1>
+                    <p class="desc">Hechas con fruta fresca del día, receta casera y mucho cariño. ¡El sabor que te enamora!</p>
+                    <div class="btn-group">
+                        <a href="#sabores" class="btn-primary">Ver sabores y precios →</a>
+                        <a href="#pedidos" class="btn-secondary">Hacer pedido</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="num pink">18+</div>
+                            <div class="label">Sabores</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="num fuchsia">S/2.70</div>
+                            <div class="label">Desde 12 oz</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="num blue">Lima</div>
+                            <div class="label">Envío por app</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-img">
+                    <img src="https://i.ibb.co/6c3JZ1rV/IMG-20260910-WA0145.jpg" alt="Cremoladas RyG" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sabores -->
+    <section id="sabores" style="background: rgba(250,245,255,0.5);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros <span>Sabores y Precios</span></h2>
+                <p>Hechas con fruta fresca del día. Elige tu favorito.</p>
+            </div>
+            <div class="price-cards">
+                <div class="price-card pink">
+                    <div class="price-icon">🍓</div>
+                    <h4>De fruta</h4>
+                    <div class="price-values">
+                        <span class="price-tag"><small>12 oz</small>S/2.70</span>
+                        <span class="price-tag"><small>14 oz</small>S/3.20</span>
+                    </div>
+                </div>
+                <div class="price-card fuchsia">
+                    <!-- MARACUYÁ AMARILLA (SVG) -->
+                    <div class="price-icon">
+                        <svg width="34" height="34" viewBox="0 0 34 34">
+                            <ellipse cx="17" cy="18" rx="11" ry="12" fill="#f59e0b"/>
+                            <ellipse cx="13" cy="14" rx="3" ry="4" fill="#fde68a" opacity="0.8"/>
+                            <path d="M17 6 Q17 3 20 2.5" stroke="#65a30d" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <circle cx="22" cy="22" r="1.5" fill="#d97706" opacity="0.5"/>
+                            <circle cx="12" cy="24" r="1.2" fill="#d97706" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h4>Con maracuyá</h4>
+                    <div class="price-values">
+                        <span class="price-tag"><small>12 oz</small>S/3.00</span>
+                        <span class="price-tag"><small>14 oz</small>S/3.50</span>
+                    </div>
+                </div>
+                <div class="price-card blue">
+                    <div class="price-icon">🥛</div>
+                    <h4>Con leche</h4>
+                    <div class="price-values">
+                        <span class="price-tag"><small>12 oz</small>S/3.20</span>
+                        <span class="price-tag"><small>14 oz</small>S/3.70</span>
+                    </div>
+                </div>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="fruta">De fruta</button>
+                <button class="filter-btn" data-filter="maracuya">Con maracuyá</button>
+                <button class="filter-btn" data-filter="leche">Con leche</button>
+            </div>
+            <div class="flavors-grid" id="flavorsContainer"></div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras <span>Fotos</span></h2>
+                <p>¡Mira qué ricas se ven! 🍧</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://i.ibb.co/gFFdMfrx/IMG-20260819-105327.jpg" alt="Cremolada RyG" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/gL90tTGD/IMG-20260819-104954.jpg" alt="Cremolada RyG" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/kg8Wyxzn/IMG-20260406-164839-edit-1967847596111096.jpg" alt="Cremolada RyG" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Q7P37DhC/IMG-20260323-155147.jpg" alt="Cremolada RyG" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/1GdR7fb8/IMG-20260824-121339.jpg" alt="Cremolada RyG" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedidos -->
+    <section id="pedidos" style="background: rgba(238,242,255,0.4);">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo <span>pedir?</span></h2>
+                <p>Hacemos envíos por aplicativo a todos los distritos de Lima</p>
+            </div>
+            <div class="pedidos-grid">
+                <div class="pedido-card pink">
+                    <div class="pedido-icon">🛵</div>
+                    <h3>Envío a toda Lima</h3>
+                    <p>Entregamos a todos los distritos por aplicativo. Pide por WhatsApp y coordinamos tu entrega. <strong>Pago contra entrega</strong>.</p>
+                    <div class="pedido-note pink">✅ Envío a todos los distritos de Lima</div>
+                    <br>
+                    <a href="https://wa.me/51912054370" target="_blank" class="btn-wsp">💬 WhatsApp: 912054370</a>
+                </div>
+                <div class="pedido-card fuchsia">
+                    <div class="pedido-icon">📦</div>
+                    <h3>Pedido al por mayor</h3>
+                    <p>Para eventos, reuniones o tu propio negocio. Precios especiales por volumen. Cotiza sin compromiso.</p>
+                    <div class="pedido-note fuchsia">📦 Pedido mínimo: 30 cremoladas</div>
+                    <br>
+                    <a href="https://wa.me/51912054370" target="_blank" class="btn-outline">Cotizar por WhatsApp →</a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div>📘 Facebook: <strong>Cremoladas RyG</strong></div>
+                <div>💵 <strong>Pago contra entrega</strong></div>
+            </div>
+            <div class="features">
+                <div class="feature-item">❄️ Frescas y selladas</div>
+                <div class="feature-item">🏪 También puedes recoger</div>
+                <div class="feature-item">🍃 Sin colorantes artificiales</div>
+                <div class="feature-item">💵 Pago contra entrega</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <h3>🍧 Cremoladas <span>RyG</span></h3>
+                <p>100% Fruta natural · Sin colorantes artificiales<br>
+                Envíos a toda Lima · Pedido mínimo 30 cremoladas · Pago contra entrega</p>
+            </div>
+            <div class="footer-contact">
+                <p>📲 <strong>WhatsApp: 912054370</strong></p>
+                <p style="font-size:11px; margin-top:8px;">© 2026 Cremoladas RyG · Hecho con cariño 💜</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const flavors = [
+            { name: "Fresa", cat: "fruta", type: "fruta", desc: "Fresca y dulce. La favorita de siempre.", fav: false },
+            { name: "Mango", cat: "fruta", type: "fruta", desc: "Tropical y dulce. Puro mango maduro.", fav: false },
+            { name: "Lúcuma", cat: "fruta", type: "fruta", desc: "El oro de los Andes. Cremosa y dulce.", fav: false },
+            { name: "Maracuyá", cat: "maracuya", type: "maracuya", desc: "Cítrica y refrescante.", fav: true },
+            { name: "Tamarindo", cat: "fruta", type: "fruta", desc: "Ácido-dulce. Sabor tradicional peruano.", fav: false },
+            { name: "Piña", cat: "fruta", type: "fruta", desc: "Ácida y refrescante. Puro sabor tropical.", fav: false },
+            { name: "Arándano", cat: "fruta", type: "fruta", desc: "Ácido y dulce. Fruta fresca del día.", fav: false },
+            { name: "Fresa con maracuyá", cat: "maracuya", type: "maracuya", desc: "Dulzura de fresa con el toque del maracuyá.", fav: true },
+            { name: "Fresa con mango", cat: "fruta", type: "fruta", desc: "Lo mejor de dos mundos. Tropical y dulce.", fav: false },
+            { name: "Fresa con lúcuma", cat: "fruta", type: "fruta", desc: "Frutal y cremosa. Una combinación única.", fav: false },
+            { name: "Fresa con tamarindo", cat: "fruta", type: "fruta", desc: "Dulce y ácida. Una mezcla especial.", fav: false },
+            { name: "Maracumango", cat: "maracuya", type: "maracuya", desc: "La más pedida. Mango + maracuyá.", fav: true },
+            { name: "Maracuyá con fresa", cat: "maracuya", type: "maracuya", desc: "Maracuyá con trocitos de fresa natural.", fav: false },
+            { name: "Maracuyá con tamarindo", cat: "maracuya", type: "maracuya", desc: "Cítrico y ácido. Para los valientes.", fav: false },
+            { name: "Coco", cat: "leche", type: "leche", desc: "Coco rallado con leche. Cremoso y tropical.", fav: false },
+            { name: "Oreo", cat: "leche", type: "leche", desc: "Galleta Oreo triturada con leche. Irresistible.", fav: true },
+            { name: "Choco chips", cat: "leche", type: "leche", desc: "Chocolate con chispas crujientes.", fav: false },
+            { name: "Lúcuma con leche", cat: "leche", type: "leche", desc: "Lúcuma peruana con leche extra cremosa.", fav: false },
+            { name: "Fresa con crema", cat: "leche", type: "leche", desc: "Fresa natural bañada en crema de leche.", fav: false },
+            { name: "Chocomaní", cat: "leche", type: "leche", desc: "Chocolate con maní tostado. Increíble.", fav: false }
+        ];
+        const prices = {
+            fruta: { s12: "S/2.70", s14: "S/3.20" },
+            maracuya: { s12: "S/3.00", s14: "S/3.50" },
+            leche: { s12: "S/3.20", s14: "S/3.70" }
+        };
+        const classes = {
+            fruta: { card: "pink", tag: "pink", label: "De fruta" },
+            maracuya: { card: "fuchsia", tag: "fuchsia", label: "Con maracuyá" },
+            leche: { card: "blue", tag: "blue", label: "Con leche" }
+        };
+        const container = document.getElementById("flavorsContainer");
+        function render(filter) {
+            container.innerHTML = "";
+            const filtered = filter === "todos" ? flavors : flavors.filter(f => f.cat === filter);
+            filtered.forEach(function(f) {
+                const c = classes[f.type];
+                const p = prices[f.type];
+                const badge = f.fav ? '<span class="favorite-badge">⭐ Favorito</span>' : '';
+                container.innerHTML +=
+                    '<div class="flavor-card ' + c.card + '">' +
+                        '<span class="flavor-tag ' + c.tag + '">' + c.label + '</span>' +
+                        '<h3>' + f.name + badge + '</h3>' +
+                        '<p>' + f.desc + '</p>' +
+                        '<div class="flavor-price-row">' +
+                            '<div class="flavor-price"><small>12 oz</small>' + p.s12 + '</div>' +
+                            '<div class="flavor-price"><small>14 oz</small>' + p.s14 + '</div>' +
+                        '</div>' +
+                    '</div>';
+            });
+        }
+        render("todos");
+        document.querySelectorAll(".filter-btn").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
+                this.classList.add("active");
+                render(this.getAttribute("data-filter"));
+            });
+        });
+    </script>
+</body>
+</html>
